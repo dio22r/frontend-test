@@ -225,22 +225,18 @@ $arrPacket = [
   ]
 ];
 
+$json = file_get_contents('assets/price-data.json');
+$obj = json_decode($json, true);
+$arrPacket = $obj["data"];
+
 foreach ($arrPacket as $key => $arrVal) {
+
   $arrPacket[$key]["normalPriceFormat"] = number_format($arrVal["normalPrice"]);
   $specialPriceFormat = number_format($arrVal["specialPrice"]);
   $arrPacket[$key]["specialPriceFormat"] = $specialPriceFormat;
   $arrPacket[$key]["specialPriceArray"] = explode(",", $specialPriceFormat);
 
   $arrPacket[$key]["totalRegisteredFormat"] = number_format($arrVal["totalRegistered"]);
-
-  // $arrTempDetail = [];
-  // foreach ($arrDetailPacket as $key2 => $val) {
-  //   $arrTempDetail[$key2] = false;
-
-  //   if (isset($arrVal["detail"][$key2])) {
-  //     $arrTempDetail[$key2] = 
-  //   } 
-  // }
 }
 
 $arrView = [
